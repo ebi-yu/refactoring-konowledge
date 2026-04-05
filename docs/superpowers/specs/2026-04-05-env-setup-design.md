@@ -98,6 +98,7 @@ tests/
 
 **TypeScript**
 - `tsconfig.json` で `strict: true`
+- 型チェッカー: `@typescript/native-preview`（tsgo）を使用（`tsc` の代わりに `npx tsgo`）
 
 ---
 
