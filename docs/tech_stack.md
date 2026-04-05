@@ -42,8 +42,8 @@ my-knowledge/
 | 役割 | 技術 | バージョン |
 |------|------|-----------|
 | フレームワーク | **Nuxt 4** | 4.x |
-| ランタイム | **Node.js** | 22 LTS (Mise で管理) |
-| 言語 | **TypeScript** | 5.x |
+| ランタイム | **Bun** | 最新安定版 |
+| 言語 | **TypeScript** (tsgo) | 5.x (tsgo: Go実装の高速型チェッカー) |
 | サーバー | **Nitro v2** (H3) | Nuxt 4 同梱 |
 | バンドラー | **Rolldown** (Vite 8) | Rustベース、esbuild/rollup を置き換え |
 
@@ -51,12 +51,11 @@ my-knowledge/
 
 | 役割 | 技術 |
 |------|------|
-| UIフレームワーク | Vue 3 (Composition API) | Options APIは無効化（バンドルサイズ削減） |
-| スタイリング | TailwindCSS v4 (`@tailwindcss/vite`) | `@nuxtjs/tailwindcss` ではなく Viteプラグインを直接使用（Nuxtモジュールのバージョン依存を排除） |
+| UIフレームワーク | **Vue 3** (Composition API + **Vapor Mode**) | VDOMレス高速レンダリング、SSR前提でVapor対応コンポーネントを優先採用。Options APIは無効化 |
+| スタイリング | **Panda CSS** | ゼロランタイムCSS-in-JS、型安全なスタイル定義、Recipes/Patterns で設計システム構築 |
 | 状態管理 | Pinia | |
 | Markdownレンダリング | markdown-it / Shiki (シンタックスハイライト) | |
 | ダイアグラム | Mermaid.js | |
-| 数式 | KaTeX (MathJaxより軽量) | |
 | アイコン | unplugin-icons + Iconify | |
 
 ### バックエンド (Nitro / H3)
@@ -66,7 +65,7 @@ my-knowledge/
 | APIルーティング | Nitro server routes (`server/api/`) |
 | ORM | **Prisma** (型安全・情報量豊富) |
 | バリデーション | **Zod** (スキーマ共有でフロントと型連携) |
-| 認証 | **nuxt-auth-utils** or better-auth |
+| 認証 | **better-auth** |
 | ファイルアップロード | unjs/unenv + ローカルストレージ or S3互換 |
 | メール送信 | Resend or nodemailer |
 | 全文検索 | **Meilisearch** (Luceneから移行、セルフホスト可) |
@@ -75,7 +74,7 @@ my-knowledge/
 
 | 役割 | 技術 |
 |------|------|
-| DB | **PostgreSQL 16** |
+| DB | **PostgreSQL 17** |
 | マイグレーション | Prisma Migrate |
 | 開発用 | Docker Compose |
 
@@ -84,10 +83,10 @@ my-knowledge/
 | 役割 | 技術 | 備考 |
 |------|------|------|
 | コンテナ | Docker / Docker Compose | |
-| パッケージマネージャ | pnpm | |
-| ランタイムバージョン管理 | **Mise** (mise-en-place) | Node.js・pnpmのバージョンを `.mise.toml` で固定 |
+| パッケージマネージャ | **Bun** (内蔵) | Bunランタイム同梱のパッケージマネージャ |
+| ランタイムバージョン管理 | **Mise** (mise-en-place) | Bunのバージョンを `.mise.toml` で固定 |
 | Linter | ESLint + @nuxt/eslint + **Oxlint** | Oxlint (Rustベース) でルール高速チェック、eslint-plugin-oxlint で重複排除 |
-| フォーマッター | **Oxfmt** | Rustベースで高速。`experimentalSortImports: true` でimport整列 |
+| フォーマッター | **Oxfmt** | RustベースでPrettier互換、30x高速。Vue/CSS/Markdown対応。import整列・Tailwindクラスソートをビルトイン |
 | テスト | Vitest (unit) + Playwright (e2e) | |
 
 ---
@@ -102,7 +101,7 @@ my-knowledge/
 | JSP テンプレート | Vue SFC |
 | Servlet Filter (認証) | Nitro middleware |
 | Gulp + Bower | Rolldown / Vite 8 (Nuxt 4内蔵) |
-| Tomcat WAR | Node.js サーバー |
+| Tomcat WAR | Bun サーバー |
 
 ---
 
@@ -198,11 +197,11 @@ export type ArticleInput = z.infer<typeof ArticleSchema>
 | 決定 | 結論 | ADR |
 |------|------|-----|
 | フルスタックフレームワーク | Nuxt 4 | [[ADR-001_framework]] |
-| DB + ORM | PostgreSQL 16 + Prisma | [[ADR-002_database]] |
+| DB + ORM | PostgreSQL 17 + Prisma | [[ADR-002_database]] |
 | 全文検索 | Meilisearch | [[ADR-002_search]] |
 | 認証ライブラリ | better-auth | [[ADR-005_auth]] |
 | ファイルストレージ | ローカルFS（開発）/ MinIO S3互換（本番） | [[ADR-006_file_storage]] |
-| サーバーランタイム | Node.js 22 LTS | [[ADR-007_runtime]] |
+| サーバーランタイム | **Bun** | [[ADR-007_runtime]] |
 
 ---
 
@@ -210,6 +209,5 @@ export type ArticleInput = z.infer<typeof ArticleSchema>
 
 - [[01_architecture]] - 現状システム解析（移行元）
 - [[ADR-001_framework]] - Nuxt 4 採用の判断根拠
-- [[ADR-002_database]] - PostgreSQL + Prisma 採用の判断根拠
 - [[ADR-002_search]] - Meilisearch 採用の判断根拠
 - [参考: Nuxt4 + Vue3.6のセットアップ](https://zenn.dev/ytr0903/articles/9c9cb812a06110)
