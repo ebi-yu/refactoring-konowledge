@@ -15,13 +15,12 @@ export default defineNuxtConfig({
 
   vue: {
     propsDestructure: true,
-    defineModel: true,
-    features: {
-      optionsAPI: false,
-    },
   },
 
   vite: {
+    define: {
+      __VUE_OPTIONS_API__: false,
+    },
     build: {
       terserOptions: {
         compress: {
