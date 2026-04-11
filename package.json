@@ -12,7 +12,8 @@
     "lint:fix": "oxlint . --fix",
     "format": "oxfmt app server shared *.ts *.json",
     "format:check": "oxfmt app server shared *.ts *.json --check",
-    "prepare": "husky"
+    "prepare": "husky",
+    "update:issue": "bash .claude/hooks/create-issues.sh"
   },
   "dependencies": {
     "@pinia/nuxt": "^0.11.3",
@@ -25,8 +26,13 @@
     "zod": "^4.3.6"
   },
   "lint-staged": {
-    "*.{ts,vue}": ["oxlint", "oxfmt --check"],
-    "*.{css,md}": ["oxfmt --check"]
+    "*.{ts,vue}": [
+      "oxlint",
+      "oxfmt"
+    ],
+    "*.{css,md}": [
+      "oxfmt"
+    ]
   },
   "devDependencies": {
     "@pandacss/dev": "^1.9.1",
@@ -36,5 +42,6 @@
     "oxfmt": "^0.44.0",
     "oxlint": "^1.59.0",
     "prisma": "^7.7.0"
-  }
+  },
+  "packageManager": "pnpm@10.13.1+sha512.37ebf1a5c7a30d5fabe0c5df44ee8da4c965ca0c5af3dbab28c3a1681b70a256218d05c81c9c0dcf767ef6b8551eb5b960042b9ed4300c59242336377e01cfad"
 }

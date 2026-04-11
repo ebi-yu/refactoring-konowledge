@@ -24,24 +24,59 @@
       "Bash(npx tsgo:*)",
       "Bash(bunx husky:*)",
       "Bash(bunx prisma:*)",
-      "Bash(mise install:*)",
-      "Bash(~/.local/bin/mise install:*)",
       "Bash(export PATH=\"$HOME/.local/share/mise/shims:$PATH\")",
-      "Bash(wait)",
-      "Bash(bunx panda:*)"
+      "Bash(bunx panda:*)",
+      "Bash(bash .claude/hooks/create-pr-if-missing.sh)",
+      "Bash(DRY_RUN=true bash:*)",
+      "Bash(DRY_RUN=true EPIC=\"認証・アカウント管理\" bash:*)",
+      "Bash(EPIC=\"認証・アカウント管理\" bash:*)",
+      "Bash(gh api:*)",
+      "Bash(ls /Users/ebi-yu/GitHub/refactoring-konowledge/docs/*.md)",
+      "Bash(python3:*)"
     ]
   },
   "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "agent",
+            "prompt": "On session start, sync docs/issues/ to GitHub issues for this repo (ebi-yu/refactoring-konowledge).\n\nWorkflow:\n1. Read docs/superpowers/plans/ to understand current implementation work\n2. Find all issue.md files under docs/issues/ recursively that have YAML frontmatter with `github_issue:`\n3. For each file:\n   a. If `github_issue` is a number: compare the markdown body (below the frontmatter) with the current GitHub issue body via `gh issue view <number> --repo ebi-yu/refactoring-konowledge --json body -q .body`. If different, update with `gh issue edit <number> --repo ebi-yu/refactoring-konowledge --body '<content>'`\n   b. If `github_issue` is null or missing: create a new GitHub issue using the title from frontmatter and the markdown body, then write the assigned issue number back into the frontmatter\n4. Maintain parent-child hierarchy: if an issue.md is inside a subfolder that also has an issue.md, link the child issue to the parent in the body\n\nOnly process files that have `github_issue:` in their frontmatter. Leave other files untouched.",
+            "timeout": 120,
+            "statusMessage": "GitHub issues を同期中..."
+          }
+        ]
+      }
+    ],
     "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "agent",
+            "prompt": "A file in docs/issues/ was just written or edited: check the tool input for the file path.\n\n1. Read the changed file\n2. Check if it has YAML frontmatter with `github_issue:`\n3. If `github_issue` is a number: update the corresponding GitHub issue body with `gh issue edit <number> --repo ebi-yu/refactoring-konowledge --body '<markdown body below frontmatter>'`\n4. If `github_issue` is null: create a new GitHub issue with the title from frontmatter and write the number back into the file's frontmatter\n5. If no `github_issue` key exists: do nothing",
+            "if": "Write(docs/issues/*)",
+            "timeout": 60,
+            "statusMessage": "GitHub issue を同期中..."
+          }
+        ]
+      },
       {
         "matcher": "Bash",
         "hooks": [
           {
+            "type": "agent",
+            "prompt": "A git commit was just made. Do the following:\n1. Run `git log -1 --format='%H %s'` to get the commit hash and message\n2. Run `gh issue view 3 --repo ebi-yu/refactoring-konowledge --json body` to read the current issue body\n3. Based on the commit message, determine which task(s) in the issue were completed\n4. Post a comment to the issue using `gh issue comment 3 --repo ebi-yu/refactoring-konowledge --body '...'` with the progress update. The comment should include: the completed task name, the commit message, and the commit hash as a reference\n5. Also update the issue body to check off the completed task(s): change `- [ ]` to `- [x]` for matching tasks using `gh issue edit 3 --repo ebi-yu/refactoring-konowledge --body '...'`\n\nOnly act on tasks that clearly match the commit message. If nothing matches, do nothing.",
+            "if": "Bash(git commit*)",
+            "timeout": 60,
+            "statusMessage": "GitHub issue の進捗を更新中..."
+          },
+          {
             "type": "command",
-            "command": "bash /Users/ebi-yu/GitHub/refactoring-konowledge/.claude/hooks/update-issue-progress.sh",
+            "command": "bash /Users/ebi-yu/GitHub/refactoring-konowledge/.claude/hooks/create-pr-if-missing.sh",
             "if": "Bash(git commit*)",
             "timeout": 30,
-            "statusMessage": "GitHub issue の進捗を更新中...",
+            "statusMessage": "PR を確認・作成中...",
             "async": true
           }
         ]
