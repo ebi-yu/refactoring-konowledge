@@ -33,7 +33,8 @@
       "Bash(gh api:*)",
       "Bash(ls /Users/ebi-yu/GitHub/refactoring-konowledge/docs/*.md)",
       "Bash(python3:*)",
-      "Bash(bash:*)"
+      "Bash(bash:*)",
+      "Bash(curl:*)"
     ]
   }
 }
