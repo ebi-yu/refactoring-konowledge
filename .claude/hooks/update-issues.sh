@@ -1,5 +1,5 @@
 #!/bin/bash
-# create-issues.sh
+# update-issues.sh
 # docs/issues/ の Epic > Story > Task 階層を GitHub Issues として一括作成する
 #
 # 親子関係: GitHub Sub-issues API を使用（ネイティブの親子関係）
@@ -11,11 +11,15 @@
 #                ストーリー#<名前> → story・task に付与
 #
 # 使い方:
-#   bash .claude/hooks/create-issues.sh                         # 全 Epic を対象に作成
-#   EPIC="認証・アカウント管理" bash .claude/hooks/create-issues.sh  # 指定 Epic のみ作成
-#   DRY_RUN=true bash .claude/hooks/create-issues.sh            # ドライラン（GitHub に何も作成しない）
+#   bash .claude/hooks/update-issues.sh                                        # 全 Epic を対象に作成
+#   EPIC="認証・アカウント管理" bash .claude/hooks/update-issues.sh            # 指定 Epic のみ作成
+#   bash .claude/hooks/update-issues.sh docs/issues/<epic>/epic.md             # 指定ファイルのみ作成/更新
+#   bash .claude/hooks/update-issues.sh docs/issues/<epic>/<story>/story.md    # 指定ファイルのみ作成/更新
+#   bash .claude/hooks/update-issues.sh docs/issues/<epic>/<story>/(TASK)*.md  # 指定ファイルのみ作成/更新
+#   DRY_RUN=true bash .claude/hooks/update-issues.sh                           # ドライラン（GitHub に何も作成しない）
 #
 # ※ マッピングファイルに記録済みの issue はスキップ（冪等）
+# ※ ファイル指定モードでは親 issue がマッピングにあれば自動でサブ issue リンクを張る
 
 set -uo pipefail
 
@@ -23,7 +27,8 @@ REPO="ebi-yu/refactoring-konowledge"
 ISSUES_DIR="docs/issues"
 MAPPING_FILE="${ISSUES_DIR}/.github-issue-map.json"
 DRY_RUN="${DRY_RUN:-false}"
-EPIC="${EPIC:-}"  # 指定があればそのエピックのみ処理
+EPIC="${EPIC:-}"        # 指定があればそのエピックのみ処理
+FILE_PATH="${1:-}"      # 第1引数でファイルパスを指定するとそのファイルのみ処理
 RATE_LIMIT_SLEEP=0.5
 
 # ── カラー出力 ────────────────────────────────────────────────
@@ -145,11 +150,121 @@ create_issue() {
   fi
 }
 
+# ── 単一ファイルモード ─────────────────────────────────────────
+# 引数: ファイルパス (epic.md / story.md / (TASK)*.md)
+process_single_file() {
+  local file_path="$1"
+
+  [ ! -f "$file_path" ] && { log_error "File not found: ${file_path}"; return 1; }
+
+  local file_name dir_path
+  file_name=$(basename "$file_path")
+  dir_path=$(dirname "$file_path")
+
+  init_mapping
+  ensure_base_labels
+
+  case "$file_name" in
+    epic.md)
+      local epic_name epic_short epic_hier_label epic_key epic_number
+      epic_name=$(basename "$dir_path")
+      epic_short=$(strip_number_prefix "$epic_name")
+      epic_hier_label="エピック#${epic_short}"
+
+      ensure_label "$epic_hier_label" "0052cc" "Epic: ${epic_short}"
+
+      epic_key="epic::${epic_name}"
+      epic_number=$(create_issue "$epic_key" "(Epic) ${epic_short}" "$file_path" \
+        "epic" "$epic_hier_label")
+      log_info "Done: Epic #${epic_number} ${epic_short}"
+      ;;
+
+    story.md)
+      local story_dir story_name epic_dir epic_name epic_short
+      local epic_hier_label story_hier_label
+      local epic_key epic_number story_key story_number
+
+      story_dir="$dir_path"
+      story_name=$(basename "$story_dir")
+      epic_dir=$(dirname "$story_dir")
+      epic_name=$(basename "$epic_dir")
+      epic_short=$(strip_number_prefix "$epic_name")
+      epic_hier_label="エピック#${epic_short}"
+      story_hier_label="ストーリー#${story_name}"
+
+      ensure_label "$epic_hier_label"   "0052cc" "Epic: ${epic_short}"
+      ensure_label "$story_hier_label"  "e4e669" "Story: ${story_name}"
+
+      story_key="story::${epic_name}::${story_name}"
+      story_number=$(create_issue "$story_key" "${story_name}" "$file_path" \
+        "story" "$epic_hier_label" "$story_hier_label")
+
+      # Epic がマッピングに存在すれば親子リンクを張る
+      epic_key="epic::${epic_name}"
+      epic_number=$(get_issue_number "$epic_key")
+      if [ -n "$epic_number" ]; then
+        link_sub_issue "$epic_number" "$story_number"
+      else
+        log_skip "Epic not in mapping — parent link skipped (run epic.md first if needed)"
+      fi
+      log_info "Done: Story #${story_number} ${story_name}"
+      ;;
+
+    \(TASK\)*.md)
+      local task_name task_short story_dir story_name epic_dir epic_name epic_short
+      local epic_hier_label story_hier_label
+      local story_key story_number task_key task_number
+
+      task_name=$(basename "$file_path" .md)
+      task_short=$(strip_number_prefix "$task_name")
+      story_dir="$dir_path"
+      story_name=$(basename "$story_dir")
+      epic_dir=$(dirname "$story_dir")
+      epic_name=$(basename "$epic_dir")
+      epic_short=$(strip_number_prefix "$epic_name")
+      epic_hier_label="エピック#${epic_short}"
+      story_hier_label="ストーリー#${story_name}"
+
+      ensure_label "$epic_hier_label"   "0052cc" "Epic: ${epic_short}"
+      ensure_label "$story_hier_label"  "e4e669" "Story: ${story_name}"
+
+      task_key="task::${epic_name}::${story_name}::${task_name}"
+      task_number=$(create_issue "$task_key" "(Task) ${task_short}" "$file_path" \
+        "task" "$epic_hier_label" "$story_hier_label")
+
+      # Story がマッピングに存在すれば親子リンクを張る
+      story_key="story::${epic_name}::${story_name}"
+      story_number=$(get_issue_number "$story_key")
+      if [ -n "$story_number" ]; then
+        link_sub_issue "$story_number" "$task_number"
+      else
+        log_skip "Story not in mapping — parent link skipped (run story.md first if needed)"
+      fi
+      log_info "Done: Task #${task_number} ${task_short}"
+      ;;
+
+    *)
+      log_error "Unknown file type: ${file_name}"
+      log_error "Expected: epic.md / story.md / (TASK)*.md"
+      return 1
+      ;;
+  esac
+}
+
 # ── メイン ────────────────────────────────────────────────────
 main() {
   log_info "Repo:       ${REPO}"
   log_info "Issues dir: ${ISSUES_DIR}"
   log_info "Dry run:    ${DRY_RUN}"
+
+  # ── ファイル指定モード ──────────────────────────────────────
+  if [ -n "$FILE_PATH" ]; then
+    log_info "File mode:  ${FILE_PATH}"
+    echo "" >&2
+    process_single_file "$FILE_PATH"
+    return $?
+  fi
+
   [ -n "$EPIC" ] && log_info "Epic filter: ${EPIC}"
   echo "" >&2
 

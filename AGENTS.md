@@ -12,3 +12,8 @@
 
   - <変更内容>
   ```
+
+## プロジェクト固有
+
+- github issueとローカルの`docs/issues`の内容を連携させている
+- 連携には`.claude/hooks/update-issues.sh`を使用している。
