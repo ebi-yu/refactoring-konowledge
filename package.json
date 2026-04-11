@@ -15,10 +15,14 @@
     "prepare": "husky"
   },
   "dependencies": {
+    "@pinia/nuxt": "^0.11.3",
     "@prisma/client": "^7.7.0",
+    "better-auth": "^1.6.2",
+    "meilisearch": "^0.57.0",
     "nuxt": "^4.4.2",
     "vue": "^3.5.31",
-    "vue-router": "^5.0.4"
+    "vue-router": "^5.0.4",
+    "zod": "^4.3.6"
   },
   "lint-staged": {
     "*.{ts,vue}": ["oxlint", "oxfmt --check"],

@@ -16,7 +16,36 @@
       "Bash(gtimeout 20 bun run dev)",
       "Bash(kill %1)",
       "Read(//tmp/**)",
-      "Bash(find server:*)"
+      "Bash(find server:*)",
+      "Bash(gh issue:*)",
+      "Bash(gh auth:*)",
+      "Bash(gh repo:*)",
+      "Bash(chmod +x:*)",
+      "Bash(npx tsgo:*)",
+      "Bash(bunx husky:*)",
+      "Bash(bunx prisma:*)",
+      "Bash(mise install:*)",
+      "Bash(~/.local/bin/mise install:*)",
+      "Bash(export PATH=\"$HOME/.local/share/mise/shims:$PATH\")",
+      "Bash(wait)",
+      "Bash(bunx panda:*)"
+    ]
+  },
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash /Users/ebi-yu/GitHub/refactoring-konowledge/.claude/hooks/update-issue-progress.sh",
+            "if": "Bash(git commit*)",
+            "timeout": 30,
+            "statusMessage": "GitHub issue の進捗を更新中...",
+            "async": true
+          }
+        ]
+      }
     ]
   }
 }
