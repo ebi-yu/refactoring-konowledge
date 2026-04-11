@@ -1,15 +1,15 @@
-# Issue テンプレート集（アジャイル：Epic / Story / Task）
+# Issue テンプレート集（アジャイル：EPIC / STORY / TASK）
 
 > 機能スコープ（[[feature_scope]]）をもとに Issue を起こす際のテンプレート集のインデックス。
-> Epic → Story → Task の 3 階層で管理する。
+> EPIC → STORY → TASK の 3 階層で管理する。
 
 ## テンプレート一覧
 
 | ファイル                               | 種別      | 概要                               |
 | -------------------------------------- | --------- | ---------------------------------- |
-| [epic_template.md](epic_template.md)   | **Epic**  | 機能グループ単位（数週間〜数ヶ月） |
-| [story_template.md](story_template.md) | **Story** | ユーザー価値単位（数日〜1 週間）   |
-| [task_template.md](task_template.md)   | **Task**  | 実装単位（数時間〜1 日）           |
+| [epic_template.md](epic_template.md)   | **EPIC**  | 機能グループ単位（数週間〜数ヶ月） |
+| [story_template.md](story_template.md) | **STORY** | ユーザー価値単位（数日〜1 週間）   |
+| [task_template.md](task_template.md)   | **TASK**  | 実装単位（数時間〜1 日）           |
 
 ---
 
@@ -17,9 +17,9 @@
 
 | 種別      | 粒度                                          | 対応するスコープ行                                      | ラベル例     |
 | --------- | --------------------------------------------- | ------------------------------------------------------- | ------------ |
-| **Epic**  | 機能グループ（数週間〜数ヶ月）                | `### 1. 認証・アカウント管理` など章レベル              | `type:epic`  |
-| **Story** | ユーザーが価値を感じる 1 機能（数日〜1 週間） | テーブル 1 行（例: `1-1 メールアドレス登録・ログイン`） | `type:story` |
-| **Task**  | Story を分割した実装単位（数時間〜1 日）      | Story 内で技術的に分割したもの                          | `type:task`  |
+| **EPIC**  | 機能グループ（数週間〜数ヶ月）                | `### 1. 認証・アカウント管理` など章レベル              | `type:epic`  |
+| **STORY** | ユーザーが価値を感じる 1 機能（数日〜1 週間） | テーブル 1 行（例: `1-1 メールアドレス登録・ログイン`） | `type:story` |
+| **TASK**  | STORY を分割した実装単位（数時間〜1 日）      | STORY 内で技術的に分割したもの                          | `type:task`  |
 
 ---
 
@@ -32,19 +32,19 @@
 章（### X. xxxxxx）を 1 つ選ぶ
         │
         ▼
-[Epic] Issue を起票 ─────────────────────────────────────┐
+[EPIC] Issue を起票 ─────────────────────────────────────┐
         │                                                 │
         ▼                                                 │
 テーブルの各行（スコープ [x] / [△] のみ）を 1 つ選ぶ      │
         │                                                 │
         ▼                                                 │
-[Story] Issue を起票 → Epic にリンク                      │
+[STORY] Issue を起票 → EPIC にリンク                      │
         │                                                 │
         ▼                                                 │
-Story を技術単位に分割                                     │
+STORY を技術単位に分割                                     │
         │                                                 │
         ▼                                                 │
-[Task] Issue を起票 → Story にリンク ────────────────────┘
+[TASK] Issue を起票 → STORY にリンク ────────────────────┘
 ```
 
 ---
@@ -53,9 +53,9 @@ Story を技術単位に分割                                     │
 
 | ラベル名             | 色（16進） | 用途             |
 | -------------------- | ---------- | ---------------- |
-| `type:epic`          | `#8B5CF6`  | Epic Issue       |
-| `type:story`         | `#3B82F6`  | Story Issue      |
-| `type:task`          | `#10B981`  | Task Issue       |
+| `type:epic`          | `#8B5CF6`  | EPIC Issue       |
+| `type:story`         | `#3B82F6`  | STORY Issue      |
+| `type:task`          | `#10B981`  | TASK Issue       |
 | `scope:in`           | `#22C55E`  | スコープイン確定 |
 | `scope:partial`      | `#F59E0B`  | 部分実装         |
 | `status:todo`        | `#E5E7EB`  | 未着手           |
@@ -66,9 +66,9 @@ Story を技術単位に分割                                     │
 
 ## 参照ドキュメント
 
-- [Epic テンプレート](epic_template.md)
-- [Story テンプレート](story_template.md)
-- [Task テンプレート](task_template.md)
+- [EPIC テンプレート](epic_template.md)
+- [STORY テンプレート](story_template.md)
+- [TASK テンプレート](task_template.md)
 - [機能スコープ一覧](../01_feature_scope.md)
 - [技術スタック](../03_tech_stack.md)
 - [ADR一覧](../adr/)

@@ -1,7 +1,7 @@
-# Story テンプレート
+# STORY テンプレート
 
 > ユーザーが価値を感じる 1 機能単位で起票する Issue のテンプレート。
-> `01_feature_scope.md` のテーブル 1 行（機能ID）が 1 Story に対応する。
+> `01_feature_scope.md` のテーブル 1 行（機能ID）が 1 STORY に対応する。
 
 ---
 
@@ -9,7 +9,7 @@
 
 ```
 (US-XX) <機能ID> <機能名>
-例: (US-1) メールアドレス登録・ログイン
+例: [US-1] メールアドレス登録・ログイン
 ```
 
 ## ラベル
@@ -64,14 +64,14 @@
 
 ## タスク一覧
 
-> Story を技術タスクに分解し、別 Issue（Task）として起票してリンクする。
+> STORY を技術タスクに分解し、別 Issue（TASK）として起票してリンクする。
 
-- [ ] #<Task Issue 番号> - <Task タイトル>
-- [ ] #<Task Issue 番号> - <Task タイトル>
+- [ ] #<TASK Issue 番号> - <TASK タイトル>
+- [ ] #<TASK Issue 番号> - <TASK タイトル>
 
 ## 参照
 
-- Epic: #<Epic Issue 番号>
+- EPIC: #<EPIC Issue 番号>
 - [[01_feature_scope]] - 機能ID: X-X
 ```
 
@@ -79,6 +79,6 @@
 
 ## 参照
 
-- [Epic テンプレート](epic_template.md)
-- [Task テンプレート](task_template.md)
+- [EPIC テンプレート](epic_template.md)
+- [TASK テンプレート](task_template.md)
 - [機能スコープ一覧](../01_feature_scope.md)

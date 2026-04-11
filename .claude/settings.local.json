@@ -32,7 +32,8 @@
       "Bash(EPIC=\"認証・アカウント管理\" bash:*)",
       "Bash(gh api:*)",
       "Bash(ls /Users/ebi-yu/GitHub/refactoring-konowledge/docs/*.md)",
-      "Bash(python3:*)"
+      "Bash(python3:*)",
+      "Bash(bash:*)"
     ]
   },
   "hooks": {

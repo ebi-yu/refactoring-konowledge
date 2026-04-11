@@ -1,6 +1,6 @@
-# Task テンプレート
+# TASK テンプレート
 
-> Story を技術的に分割した実装単位で起票する Issue のテンプレート。
+> STORY を技術的に分割した実装単位で起票する Issue のテンプレート。
 > 数時間〜1 日程度で完了できる粒度に分割する。
 
 ---
@@ -8,8 +8,8 @@
 ## タイトル形式
 
 ```
-(Task) <Story の機能ID> <実装内容>
-例: (Task) 1-1 ログインAPIエンドポイント実装
+[TASK] <STORY の機能ID> <実装内容>
+例: [TASK] 1-1 ログインAPIエンドポイント実装
 ```
 
 ## ラベル
@@ -23,11 +23,11 @@
 ```markdown
 ## 概要
 
-<!-- この Task で何を実装・対応するかを 1〜2 文で説明する -->
+<!-- この TASK で何を実装・対応するかを 1〜2 文で説明する -->
 
-## 親 Story
+## 親 STORY
 
-- Story: #<Story Issue 番号>
+- STORY: #<STORY Issue 番号>
 
 ## 作業内容
 
@@ -45,7 +45,7 @@
 - [ ] コードが実装されている
 - [ ] ユニットテストが書かれ、CI が通過している
 - [ ] セルフレビュー済み（lint / format エラーなし）
-- [ ] 親 Story の担当者にレビュー依頼済み
+- [ ] 親 STORY の担当者にレビュー依頼済み
 
 ## 見積もり
 
@@ -64,6 +64,6 @@
 
 ## 参照
 
-- [Epic テンプレート](epic_template.md)
-- [Story テンプレート](story_template.md)
+- [EPIC テンプレート](epic_template.md)
+- [STORY テンプレート](story_template.md)
 - [機能スコープ一覧](../01_feature_scope.md)
