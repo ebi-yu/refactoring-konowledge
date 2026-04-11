@@ -1,0 +1,10 @@
+[format]
+printWidth = 100
+tabWidth = 2
+useTabs = false
+semi = false
+singleQuote = true
+
+[overrides]
+[[overrides.patterns]]
+files = ["*.vue", "*.css", "*.md"]

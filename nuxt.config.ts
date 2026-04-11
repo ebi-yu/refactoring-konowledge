@@ -31,9 +31,9 @@ export default defineNuxtConfig({
   },
 
   runtimeConfig: {
-    databaseUrl: '',
+    databaseUrl: "",
     public: {
-      appUrl: '',
+      appUrl: "",
     },
   },
-})
+});
