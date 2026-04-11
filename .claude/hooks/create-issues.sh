@@ -100,11 +100,16 @@ create_issue() {
   shift 3
   local labels=("$@")
 
-  # すでに作成済みならスキップ
+  # すでに作成済みなら本文のみ更新
   local existing
   existing=$(get_issue_number "$key")
   if [ -n "$existing" ]; then
-    log_skip "#${existing} ${title}"
+    if [ "$DRY_RUN" = "true" ]; then
+      log_skip "[DRY RUN] #${existing} ${title} (would update body)"
+    else
+      gh issue edit "$existing" --repo "$REPO" --body-file "$body_file" >/dev/null 2>&1
+      log_skip "Updated body: #${existing} ${title}"
+    fi
     printf '%s' "$existing"
     return 0
   fi
