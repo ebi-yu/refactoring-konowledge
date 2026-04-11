@@ -11,15 +11,22 @@
     "lint": "oxlint .",
     "lint:fix": "oxlint . --fix",
     "format": "oxfmt app server shared *.ts *.json",
-    "format:check": "oxfmt app server shared *.ts *.json --check"
+    "format:check": "oxfmt app server shared *.ts *.json --check",
+    "prepare": "husky"
   },
   "dependencies": {
     "nuxt": "^4.4.2",
     "vue": "^3.5.31",
     "vue-router": "^5.0.4"
   },
+  "lint-staged": {
+    "*.{ts,vue}": ["oxlint", "oxfmt --check"],
+    "*.{css,md}": ["oxfmt --check"]
+  },
   "devDependencies": {
     "@typescript/native-preview": "^7.0.0-dev.20260410.1",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.4.0",
     "oxfmt": "^0.44.0",
     "oxlint": "^1.59.0"
   }
