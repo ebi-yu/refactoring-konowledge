@@ -1,0 +1,43 @@
+{
+  "expectations": [
+    {
+      "text": "story.md が docs/issues/1. 認証・アカウント管理/ 配下のディレクトリに作成されている",
+      "passed": true,
+      "evidence": "[US-5] ディレクトリに story.md が存在し outputs に保存されている"
+    },
+    {
+      "text": "story.md に受け入れ基準（Given / When / Then）が含まれている",
+      "passed": true,
+      "evidence": "outputs/story.md に Given/When/Then 形式の受け入れ基準が4項目ある"
+    },
+    {
+      "text": "story.md にユーザーストーリー（Who/What/Why形式）が含まれている",
+      "passed": true,
+      "evidence": "「利用者として〜したい。なぜなら〜だ。」の形式"
+    },
+    {
+      "text": "story.md に完了の定義（DoD）セクションがある",
+      "passed": true,
+      "evidence": "## 完了の定義（DoD）セクションが存在する"
+    },
+    {
+      "text": "[TASK]*.md ファイルが作成されている",
+      "passed": true,
+      "evidence": "[TASK] ログインAPIエンドポイント実装.md が作成・保存されている"
+    },
+    {
+      "text": "[TASK]*.md に作業内容のチェックリストがある",
+      "passed": true,
+      "evidence": "作業内容セクションにチェックリストが存在する"
+    }
+  ],
+  "summary": { "passed": 6, "failed": 0, "total": 6, "pass_rate": 1.0 },
+  "eval_feedback": {
+    "suggestions": [
+      {
+        "reason": "with/without でほぼ同一出力。このevalはスキルの識別に貢献しない。プロンプトが十分明確なため、スキルなしでも正解できる。より曖昧な状況（既存コンテキストが競合する場合）でテストすべき"
+      }
+    ],
+    "overall": "完全正解だが識別力なし。"
+  }
+}

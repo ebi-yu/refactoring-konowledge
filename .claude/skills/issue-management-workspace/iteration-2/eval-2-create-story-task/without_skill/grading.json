@@ -1,0 +1,33 @@
+{
+  "expectations": [
+    {
+      "text": "作成したStoryのタイトルが「TypeScriptの型エラーを解消したい」である",
+      "passed": true,
+      "evidence": "[US-2] TypeScriptの型エラーを解消したい ディレクトリが作成されている。iter-1 の Vapor Mode 逸脱は発生しなかった（プロンプトが明確だったため）"
+    },
+    {
+      "text": "[US-2] ディレクトリが作成されている",
+      "passed": true,
+      "evidence": "ディレクトリが存在する"
+    },
+    {
+      "text": "story.md に受け入れ基準がGiven/When/Then形式で記述されている",
+      "passed": true,
+      "evidence": "with_skill と完全に同一の内容"
+    },
+    {
+      "text": "[TASK]*.md ファイルが story と同じディレクトリに作成されている",
+      "passed": true,
+      "evidence": "[TASK] tsgo --noEmitで型チェックを通す.md が存在する"
+    }
+  ],
+  "summary": { "passed": 4, "failed": 0, "total": 4, "pass_rate": 1.0 },
+  "eval_feedback": {
+    "suggestions": [
+      {
+        "reason": "iter-1 では without_skill が完全に逸脱したが、iter-2 ではプロンプトを明確化（[US-2]指定・既存ディレクトリの注記）したことで差がなくなった。スキルの識別力を測るには競合するコンテキストが必要"
+      }
+    ],
+    "overall": "完全正解だが識別力なし。"
+  }
+}

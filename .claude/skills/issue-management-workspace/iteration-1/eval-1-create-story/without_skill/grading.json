@@ -1,0 +1,49 @@
+{
+  "expectations": [
+    {
+      "text": "story.md が docs/issues/1. 認証・アカウント管理/ 配下のディレクトリに作成されている",
+      "passed": true,
+      "evidence": "with_skill エージェントと同一ファイルシステムで競合した可能性があるが、[US-4]ディレクトリは存在する。without_skill専用の出力ファイルは workspace に保存されていない（エージェントが出力コピーをスキップした）"
+    },
+    {
+      "text": "story.md に受け入れ基準（Given / When / Then）が含まれている",
+      "passed": true,
+      "evidence": "現存の story.md（with_skill の出力と混在）には Given/When/Then が含まれているが、without_skill 単独の出力を確認できない"
+    },
+    {
+      "text": "story.md にユーザーストーリー（Who/What/Why形式）が含まれている",
+      "passed": false,
+      "evidence": "without_skill の独立した出力が workspace に保存されていないため検証不可。出力保存の指示が守られなかった"
+    },
+    {
+      "text": "story.md に完了の定義（DoD）セクションがある",
+      "passed": false,
+      "evidence": "独立した without_skill 出力なし。検証不可"
+    },
+    {
+      "text": "[TASK]*.md ファイルが作成されている",
+      "passed": false,
+      "evidence": "独立した without_skill 出力なし。検証不可"
+    },
+    {
+      "text": "[TASK]*.md に作業内容のチェックリストがある",
+      "passed": false,
+      "evidence": "独立した without_skill 出力なし。検証不可"
+    }
+  ],
+  "summary": {
+    "passed": 2,
+    "failed": 4,
+    "total": 6,
+    "pass_rate": 0.33
+  },
+  "claims": [],
+  "eval_feedback": {
+    "suggestions": [
+      {
+        "reason": "without_skill エージェントが outputs ディレクトリへの保存をスキップした。プロンプトで出力保存を必須かつ最初のステップとして強調すべき"
+      }
+    ],
+    "overall": "出力ファイル未保存のため検証不能。eval-1 の without_skill 結果は信頼できない。"
+  }
+}

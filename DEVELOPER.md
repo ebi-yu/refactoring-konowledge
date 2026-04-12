@@ -30,14 +30,6 @@ Vapor Mode 対応は[別途 Issue](./docs//issues/21.%20技術的TODO/[US-1]%20V
 
 **使い分け：** Park UI で補えないカスタムUIは Panda CSS で書く。Park UI コンポーネントのスタイル変更はコピー済みファイルを直接編集する。
 
-**Panda CSS セットアップ**
-
-`bun run dev` で `panda watch` が同時起動し、`styled-system/` を自動生成する。import は必ず `styled-system/` から行う。
-
-```ts
-import { css, cva, sva } from "../styled-system/css";
-```
-
 CSSはPanda CSSを使用すること。Panda CSSにおいてsva（Slot Variants API）を使用して、コンポーネントのスタイルをスロットごとに定義し、スタイルをコンポーネントに閉じ込めることが推奨される。
 
 ```ts

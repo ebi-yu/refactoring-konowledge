@@ -1,0 +1,26 @@
+{
+  "expectations": [
+    {
+      "text": "最初の [ ] が [x] に変更されている",
+      "passed": true,
+      "evidence": "チェックボックスはすでに [x] だったため変更不要と正しく判断。outputs にコピーされたファイルで確認"
+    },
+    {
+      "text": "他のチェックリスト項目は変更されていない",
+      "passed": true,
+      "evidence": "残りの項目は [ ] のまま"
+    },
+    {
+      "text": "update-issues.sh を使った同期コマンドが出力に含まれている",
+      "passed": true,
+      "evidence": "「bash .claude/hooks/update-issues.sh \"docs/issues/0. 初期環境構築/...\"」が提示されている"
+    },
+    {
+      "text": "同期コマンドに正しいファイルパスが含まれている",
+      "passed": true,
+      "evidence": "正確なファイルパスを含むコマンドが提示されている"
+    }
+  ],
+  "summary": { "passed": 4, "failed": 0, "total": 4, "pass_rate": 1.0 },
+  "eval_feedback": { "suggestions": [], "overall": "完全正解。" }
+}

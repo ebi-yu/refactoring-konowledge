@@ -4,7 +4,7 @@
   "type": "module",
   "scripts": {
     "build": "panda && nuxt build",
-    "dev": "panda watch & nuxt dev",
+    "dev": "panda --watch & nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "lint": "oxlint .",

@@ -1,0 +1,58 @@
+{
+  "expectations": [
+    {
+      "text": "story.md が docs/issues/1. 認証・アカウント管理/ 配下のディレクトリに作成されている",
+      "passed": true,
+      "evidence": "docs/issues/1. 認証・アカウント管理/[US-4] メールアドレスとパスワードでログインできる/story.md が存在する"
+    },
+    {
+      "text": "story.md に受け入れ基準（Given / When / Then）が含まれている",
+      "passed": true,
+      "evidence": "story.md に4つの Given/When/Then シナリオが記述されている（ログイン成功・失敗・空欄・ログアウト）"
+    },
+    {
+      "text": "story.md にユーザーストーリー（Who/What/Why形式）が含まれている",
+      "passed": true,
+      "evidence": "「利用者として、メールアドレスとパスワードでログインしたい。なぜなら〜だ。」の形式で記述されている"
+    },
+    {
+      "text": "story.md に完了の定義（DoD）セクションがある",
+      "passed": true,
+      "evidence": "## 完了の定義（DoD）セクションに3項目のチェックリストがある"
+    },
+    {
+      "text": "[TASK]*.md ファイルが作成されている",
+      "passed": true,
+      "evidence": "[TASK] ログインAPIエンドポイント実装.md が同ディレクトリに存在する"
+    },
+    {
+      "text": "[TASK]*.md に作業内容のチェックリストがある",
+      "passed": true,
+      "evidence": "作業内容セクションに7項目のチェックリスト（エンドポイント実装・バリデーション・パスワードハッシュ等）がある"
+    }
+  ],
+  "summary": {
+    "passed": 6,
+    "failed": 0,
+    "total": 6,
+    "pass_rate": 1.0
+  },
+  "claims": [
+    {
+      "claim": "技術メモにAPIリクエスト/レスポンス形式が記述されている",
+      "type": "quality",
+      "verified": true,
+      "evidence": "JSON形式のリクエスト・レスポンス例が技術メモに含まれている"
+    },
+    {
+      "claim": "セキュリティ考慮（レートリミット）が作業項目に含まれている",
+      "type": "quality",
+      "verified": true,
+      "evidence": "「レートリミットの設定（ブルートフォース攻撃対策）」が作業内容に含まれている"
+    }
+  ],
+  "eval_feedback": {
+    "suggestions": [],
+    "overall": "スキルのフォーマットに正確に従い、高品質な出力。受け入れ基準が4シナリオと充実している。"
+  }
+}

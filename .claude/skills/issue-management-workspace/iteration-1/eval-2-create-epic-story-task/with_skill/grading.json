@@ -1,0 +1,51 @@
+{
+  "expectations": [
+    {
+      "text": "docs/issues/21. 技術的TODO/ ディレクトリが存在する（または作成された）",
+      "passed": true,
+      "evidence": "docs/issues/21. 技術的TODO/ ディレクトリが存在し、epic.md と story ディレクトリが含まれている"
+    },
+    {
+      "text": "epic.md が作成または既存のものが参照されている",
+      "passed": true,
+      "evidence": "docs/issues/21. 技術的TODO/epic.md が存在する（既存または新規作成）"
+    },
+    {
+      "text": "[US-1] ディレクトリが作成されている",
+      "passed": true,
+      "evidence": "docs/issues/21. 技術的TODO/[US-1] TypeScriptの型エラーを解消したい/ ディレクトリが存在する"
+    },
+    {
+      "text": "story.md に受け入れ基準がGiven/When/Then形式で記述されている",
+      "passed": true,
+      "evidence": "story.md の受け入れ基準に「Given TypeScriptの型エラーが存在する状態で / When tsgo --noEmit を実行したとき / Then 型エラーが0件になり、コマンドが正常終了すること」が記述されている"
+    },
+    {
+      "text": "[TASK]*.md ファイルが作成されている",
+      "passed": false,
+      "evidence": "docs/issues/21. 技術的TODO/[US-1] TypeScriptの型エラーを解消したい/ にTask ファイルが存在しない（story.md のみ）"
+    }
+  ],
+  "summary": {
+    "passed": 4,
+    "failed": 1,
+    "total": 5,
+    "pass_rate": 0.8
+  },
+  "claims": [
+    {
+      "claim": "story.md のユーザーストーリーが「開発者として〜」の形式で記述されている",
+      "type": "quality",
+      "verified": true,
+      "evidence": "「開発者 として、TypeScriptの型エラーを解消 したい。なぜなら 型安全性を確保してバグを未然に防ぎ〜」"
+    }
+  ],
+  "eval_feedback": {
+    "suggestions": [
+      {
+        "reason": "Task ファイルが作成されなかった。スキルの「作業内容」セクションに「別ファイルで詳細管理」と書いているが、実際にTask ファイルを作るところまで誘導できていない。スキルに「Storyを作ったら必ずTaskファイルも作成すること」と明示すべき"
+      }
+    ],
+    "overall": "ディレクトリ構造・フォーマット・受け入れ基準は正確。Taskファイル作成が抜けている。"
+  }
+}

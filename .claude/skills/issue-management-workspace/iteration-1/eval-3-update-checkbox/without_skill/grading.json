@@ -1,0 +1,35 @@
+{
+  "expectations": [
+    {
+      "text": "対象のtaskファイルを読み込んでいる",
+      "passed": true,
+      "evidence": "outputs/ に [TASK] Panda CSSデザイントークン定義.md が保存されており、ファイルを読み込んでいる"
+    },
+    {
+      "text": "最初の [ ] が [x] に変更されている",
+      "passed": true,
+      "evidence": "outputs のファイルで「- [x] ブランドカラー: `brand.50`〜`brand.900`」に変更されている"
+    },
+    {
+      "text": "他のチェックリスト項目は変更されていない",
+      "passed": true,
+      "evidence": "グレースケール・ステータスカラー以降の全項目が [ ] のまま"
+    },
+    {
+      "text": "更新後のファイル内容が出力に含まれている",
+      "passed": true,
+      "evidence": "outputs/ ディレクトリにファイルのコピーが保存されている"
+    }
+  ],
+  "summary": {
+    "passed": 4,
+    "failed": 0,
+    "total": 4,
+    "pass_rate": 1.0
+  },
+  "claims": [],
+  "eval_feedback": {
+    "suggestions": [],
+    "overall": "スキルなしでも完全正解。このevalはスキルの識別に不向き。"
+  }
+}

@@ -14,9 +14,6 @@ Epic → Story → Task の3層でタスクを管理し、`update-issues.sh` で
 docs/issues/
 ├── .github-issue-map.json     # GitHub Issue番号のマッピング（自動管理）
 ├── template/                  # テンプレートファイル
-│   ├── epic_template.md
-│   ├── story_template.md
-│   └── task_template.md
 └── <N>. <エピック名>/         # 例: "0. 初期環境構築"
     ├── epic.md
     └── [US-N] <ストーリー名>/ # 例: "[US-1] デザイントークンを設定したい"
@@ -32,20 +29,26 @@ docs/issues/
 | Story | `story.md`         | ユーザーが価値を感じる1機能 | `story` |
 | Task  | `[TASK] <名前>.md` | 数時間〜1日の実装単位       | `task`  |
 
-## ファイル作成の手順
+## ファイル作成手順
 
-### 1. Epic を作成する
+**必ずこの順序で作成すること（GitHubの親子リンクがこの順序に依存するため）:**
 
-既存のEpicリストを確認し、該当Epicが存在しない場合のみ新規作成する。
+1. Epic → 2. Story → 3. Task
+
+Storyを作成したら **必ず** 対応するTaskファイルも同じディレクトリに作成する。Task なしの Story はこのプロジェクトでは不完全とみなされる。
+
+### Step 1. Epic の確認・作成
+
+まず既存のEpicを確認する:
 
 ```bash
-# 既存のEpicを確認
 ls docs/issues/
 ```
 
-ディレクトリ名: `<連番>. <エピック名>`（例: `21. 技術的TODO`）
+**既存のEpicに追加する場合はそのまま使う。新規Epicが必要な場合のみ作成する。**
+ディレクトリ番号は既存の最大番号 + 1 とする。
 
-`docs/issues/<N>. <エピック名>/epic.md` を以下の形式で作成:
+`docs/issues/<N>. <エピック名>/epic.md`:
 
 ```markdown
 # [EPIC] <エピック名>
@@ -79,11 +82,12 @@ ls docs/issues/
 - [feature_scope](./docs/feature_scope.md)
 ```
 
-### 2. Story を作成する
+### Step 2. Story の作成
 
-ディレクトリ名: `[US-N] <ストーリー名>`（例: `[US-3] ユーザー登録ができる`）
+ディレクトリ名: `[US-N] <ストーリー名>`
+N はそのEpic内の既存ストーリー数 + 1。
 
-`docs/issues/<epic>/<story>/story.md` を以下の形式で作成:
+`docs/issues/<epic>/[US-N] <ストーリー名>/story.md`:
 
 ```markdown
 ## 概要
@@ -100,7 +104,7 @@ ls docs/issues/
 
 ## 作業内容
 
-- [ ] TASK 1: <タスク名>（別ファイルで詳細管理）
+- [ ] TASK 1: <タスク名>（[TASK]ファイルで詳細管理）
 
 ## 受け入れ基準
 
@@ -117,11 +121,13 @@ ls docs/issues/
 - [ ] セルフレビュー済み（lint / format エラーなし）
 ```
 
-### 3. Task を作成する
+### Step 3. Task の作成（Story 作成後に必ず実行）
 
-ファイル名: `[TASK] <タスク名>.md`（例: `[TASK] ログインAPIエンドポイント実装.md`）
+Story 作成後、**同じディレクトリに必ず1つ以上のTaskファイルを作成する**。
 
-`docs/issues/<epic>/<story>/[TASK] <名前>.md` を以下の形式で作成:
+ファイル名: `[TASK] <タスク名>.md`
+
+`docs/issues/<epic>/[US-N] <ストーリー名>/[TASK] <タスク名>.md`:
 
 ```markdown
 ## 概要
@@ -134,8 +140,8 @@ ls docs/issues/
 
 ## 作業内容
 
-- [ ] ...
-- [ ] ...
+- [ ] <具体的な実装ステップ>
+- [ ] <具体的な実装ステップ>
 
 ## 技術メモ
 
@@ -157,64 +163,38 @@ ls docs/issues/
 
 ## GitHub への同期
 
-ファイル作成・更新後は必ずGitHubに同期する。
-
-### 単一ファイルを同期（推奨）
+ファイル作成・更新後は必ず **Epic → Story → Task の順** で同期する（親子リンクのため）。
 
 ```bash
 # Epic を同期
-bash .claude/hooks/update-issues.sh docs/issues/<epic>/epic.md
+bash .claude/hooks/update-issues.sh "docs/issues/<N>. <エピック名>/epic.md"
 
-# Story を同期（Epic が先に同期済みであること）
-bash .claude/hooks/update-issues.sh "docs/issues/<epic>/<story>/story.md"
+# Story を同期
+bash .claude/hooks/update-issues.sh "docs/issues/<epic>/[US-N] <ストーリー名>/story.md"
 
-# Task を同期（Story が先に同期済みであること）
-bash .claude/hooks/update-issues.sh "docs/issues/<epic>/<story>/[TASK] タスク名.md"
+# Task を同期
+bash .claude/hooks/update-issues.sh "docs/issues/<epic>/[US-N] <ストーリー名>/[TASK] <タスク名>.md"
 ```
 
-### 注意事項
+**ポイント:**
 
-- **順序が重要**: Epic → Story → Task の順で同期すること（親子リンクのため）
-- **冪等**: 同じファイルを何度同期しても安全（マッピング済みのIssueは本文のみ更新）
-- **ドライラン**: `DRY_RUN=true bash .claude/hooks/update-issues.sh` で実際には作成しない
+- 冪等: 同じファイルを何度同期しても安全（既存Issueは本文のみ更新）
+- ドライラン確認: `DRY_RUN=true bash .claude/hooks/update-issues.sh`
 
 ## タスク進捗の更新
 
-実装が進んだら Task ファイルのチェックボックスを更新し、GitHubに同期する。
-
-```markdown
-## 作業内容
-
-- [x] APIエンドポイント実装（完了）
-- [ ] テスト作成
-- [ ] ドキュメント更新
-```
-
-更新後:
+実装が進んだらTaskファイルのチェックボックスを `[ ]` → `[x]` に更新し、GitHubに同期する。
 
 ```bash
 bash .claude/hooks/update-issues.sh "docs/issues/<epic>/<story>/[TASK] タスク名.md"
 ```
 
-## 実装開始時のチェックリスト
+## 実装開始前チェックリスト
 
-1. 該当Epicが存在するか確認（`ls docs/issues/`）
-2. 存在しない場合はEpicを作成してGitHubに同期
-3. Storyを作成してGitHubに同期
-4. Taskに分解してGitHubに同期
-5. 実装開始
+実装に着手する前に必ず確認する:
 
-## よくある操作例
-
-**新機能のIssue一式を作成する場合:**
-
-```bash
-# 1. Epicを作成・同期
-bash .claude/hooks/update-issues.sh docs/issues/"21. 技術的TODO"/epic.md
-
-# 2. Storyを作成・同期
-bash .claude/hooks/update-issues.sh "docs/issues/21. 技術的TODO/[US-1] 〇〇機能/story.md"
-
-# 3. Taskを作成・同期
-bash .claude/hooks/update-issues.sh "docs/issues/21. 技術的TODO/[US-1] 〇〇機能/[TASK] 実装.md"
-```
+1. `ls docs/issues/` で該当Epicが存在するか確認
+2. 対応するStoryディレクトリ（`[US-N]`）が存在するか確認
+3. Storyの中にTaskファイル（`[TASK]*.md`）が存在するか確認
+4. 存在しない場合は Step 1〜3 でファイルを作成してから同期
+5. **その後** に実装開始

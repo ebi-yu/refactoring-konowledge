@@ -1,0 +1,26 @@
+{
+  "expectations": [
+    {
+      "text": "作成したStoryのタイトルが「TypeScriptの型エラーを解消したい」である",
+      "passed": true,
+      "evidence": "[US-2] TypeScriptの型エラーを解消したい ディレクトリが作成されている"
+    },
+    {
+      "text": "[US-2] ディレクトリが作成されている",
+      "passed": true,
+      "evidence": "docs/issues/21. 技術的TODO/[US-2] TypeScriptの型エラーを解消したい/ が存在する"
+    },
+    {
+      "text": "story.md に受け入れ基準がGiven/When/Then形式で記述されている",
+      "passed": true,
+      "evidence": "Given: 型エラーが存在する状態 / When: tsgo --noEmit 実行 / Then: 0件になり正常終了"
+    },
+    {
+      "text": "[TASK]*.md ファイルが story と同じディレクトリに作成されている",
+      "passed": true,
+      "evidence": "[TASK] tsgo --noEmitで型チェックを通す.md が存在し outputs に保存されている"
+    }
+  ],
+  "summary": { "passed": 4, "failed": 0, "total": 4, "pass_rate": 1.0 },
+  "eval_feedback": { "suggestions": [], "overall": "完全正解。iter-1 の Task漏れが修正された。" }
+}
