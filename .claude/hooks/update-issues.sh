@@ -51,7 +51,7 @@ save_issue_number() {
 }
 
 # ── ラベル名生成ヘルパー ──────────────────────────────────────
-strip_number_prefix() { echo "$1" | sed 's/^[0-9]*[[:space:]]*\.[[:space:]]*//' | sed 's/^(TASK)[[:space:]]*//' ; }
+strip_number_prefix() { echo "$1" | sed 's/^[0-9]*[[:space:]]*\.[[:space:]]*//' | sed 's/^\[TASK\][[:space:]]*//' ; }
 
 # ── ラベル作成 ────────────────────────────────────────────────
 ensure_label() {
@@ -151,7 +151,7 @@ create_issue() {
 }
 
 # ── 単一ファイルモード ─────────────────────────────────────────
-# 引数: ファイルパス (epic.md / story.md / (TASK)*.md)
+# 引数: ファイルパス (epic.md / story.md / [TASK]*.md)
 process_single_file() {
   local file_path="$1"
 
@@ -174,7 +174,7 @@ process_single_file() {
       ensure_label "$epic_hier_label" "0052cc" "Epic: ${epic_short}"
 
       epic_key="epic::${epic_name}"
-      epic_number=$(create_issue "$epic_key" "(Epic) ${epic_short}" "$file_path" \
+      epic_number=$(create_issue "$epic_key" "[EPIC] ${epic_short}" "$file_path" \
         "epic" "$epic_hier_label")
       log_info "Done: Epic #${epic_number} ${epic_short}"
       ;;
@@ -210,7 +210,7 @@ process_single_file() {
       log_info "Done: Story #${story_number} ${story_name}"
       ;;
 
-    \(TASK\)*.md)
+    \[TASK\]*.md)
       local task_name task_short story_dir story_name epic_dir epic_name epic_short
       local epic_hier_label story_hier_label
       local story_key story_number task_key task_number
@@ -229,7 +229,7 @@ process_single_file() {
       ensure_label "$story_hier_label"  "e4e669" "Story: ${story_name}"
 
       task_key="task::${epic_name}::${story_name}::${task_name}"
-      task_number=$(create_issue "$task_key" "(Task) ${task_short}" "$file_path" \
+      task_number=$(create_issue "$task_key" "[TASK] ${task_short}" "$file_path" \
         "task" "$epic_hier_label" "$story_hier_label")
 
       # Story がマッピングに存在すれば親子リンクを張る
@@ -245,7 +245,7 @@ process_single_file() {
 
     *)
       log_error "Unknown file type: ${file_name}"
-      log_error "Expected: epic.md / story.md / (TASK)*.md"
+      log_error "Expected: epic.md / story.md / [TASK]*.md"
       return 1
       ;;
   esac
@@ -292,7 +292,7 @@ main() {
     # ── Epic issue ──
     local epic_key="epic::${epic_name}"
     local epic_number
-    epic_number=$(create_issue "$epic_key" "(Epic) ${epic_short}" "$epic_md" \
+    epic_number=$(create_issue "$epic_key" "[EPIC] ${epic_short}" "$epic_md" \
       "epic" "$epic_hier_label")
     epic_count=$((epic_count + 1))
 
@@ -325,14 +325,14 @@ main() {
         # ── Task issue → Story の子に ──
         local task_key="task::${epic_name}::${story_name}::${task_name}"
         local task_number
-        task_number=$(create_issue "$task_key" "(Task) ${task_short}" "$task_file" \
+        task_number=$(create_issue "$task_key" "[TASK] ${task_short}" "$task_file" \
           "task" "$epic_hier_label" "$story_hier_label")
         task_count=$((task_count + 1))
 
         # Story → Task の親子リンク
         link_sub_issue "$story_number" "$task_number"
 
-      done < <(find "$story_dir" -maxdepth 1 -name "(TASK)*.md" | sort)
+      done < <(find "$story_dir" -maxdepth 1 -name "\[TASK\]*.md" | sort)
 
     done < <(find "$epic_dir" -maxdepth 1 -mindepth 1 -type d | sort)
 

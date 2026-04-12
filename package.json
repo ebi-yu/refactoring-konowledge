@@ -1,13 +1,12 @@
 {
-  "name": "refactoring-konowledge",
+  "name": "refactoring-knowledge",
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "nuxt build",
-    "dev": "nuxt dev",
+    "build": "panda codegen && nuxt build",
+    "dev": "panda watch & nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare",
     "lint": "oxlint .",
     "lint:fix": "oxlint . --fix",
     "format": "oxfmt app server shared *.ts *.json",
@@ -16,12 +15,14 @@
     "update:issue": "bash .claude/hooks/update-issues.sh"
   },
   "dependencies": {
+    "@ark-ui/vue": "^5.36.0",
+    "@park-ui/panda-preset": "^0.43.1",
     "@pinia/nuxt": "^0.11.3",
     "@prisma/client": "^7.7.0",
     "better-auth": "^1.6.2",
     "meilisearch": "^0.57.0",
     "nuxt": "^4.4.2",
-    "vue": "^3.5.31",
+    "vue": "^3.6.0-beta.9",
     "vue-router": "^5.0.4",
     "zod": "^4.3.6"
   },
@@ -43,5 +44,5 @@
     "oxlint": "^1.59.0",
     "prisma": "^7.7.0"
   },
-  "packageManager": "pnpm@10.13.1+sha512.37ebf1a5c7a30d5fabe0c5df44ee8da4c965ca0c5af3dbab28c3a1681b70a256218d05c81c9c0dcf767ef6b8551eb5b960042b9ed4300c59242336377e01cfad"
+  "packageManager": "bun@1.3.12"
 }

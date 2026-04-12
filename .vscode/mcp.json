@@ -1,0 +1,11 @@
+{
+  "servers": {
+    "panda": {
+      "command": "npx",
+      "args": [
+        "panda",
+        "mcp"
+      ]
+    }
+  }
+}

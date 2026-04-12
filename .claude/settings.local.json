@@ -34,7 +34,13 @@
       "Bash(ls /Users/ebi-yu/GitHub/refactoring-konowledge/docs/*.md)",
       "Bash(python3:*)",
       "Bash(bash:*)",
-      "Bash(curl:*)"
+      "Bash(curl:*)",
+      "Bash(bun add:*)",
+      "Bash(bun panda:*)",
+      "Bash(node:*)"
     ]
-  }
+  },
+  "enabledMcpjsonServers": [
+    "panda"
+  ]
 }

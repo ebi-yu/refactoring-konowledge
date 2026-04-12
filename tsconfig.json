@@ -1,6 +1,7 @@
 {
   "extends": "./.nuxt/tsconfig.json",
   "compilerOptions": {
+    "types": ["bun"],
     "strict": true,
     "noUncheckedIndexedAccess": true
   }
