@@ -1,6 +1,10 @@
 {
   "extends": "./.nuxt/tsconfig.json",
   "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "~/*": ["./app/*"]
+    },
     "types": ["bun"],
     "strict": true,
     "noUncheckedIndexedAccess": true
