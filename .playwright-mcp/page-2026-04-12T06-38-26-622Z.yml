@@ -1,0 +1,4 @@
+- generic [ref=e4]:
+  - button "Hello Park UI" [ref=e5]
+  - button "Outline" [ref=e6]
+  - button "Ghost" [ref=e7]

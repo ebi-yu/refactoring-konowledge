@@ -15,7 +15,9 @@
 
 ## フロントエンド
 
-vueファイルはVapor Modeで書くこと。Vapor Modeは、Vue 3.6で導入された新しいコンポーネント記法で、よりシンプルで高速なレンダリングを実現する。`vapor` ディレクティブを `<script setup>` に追加して使用する。
+Vue ファイルは現在 Vapor Mode を使用しない。Vue 3.6 beta において、Vapor コンポーネントから VDOM コンポーネント（`@ark-ui/vue` 等）を使う場合に SSR hydration でクラッシュする既知の問題があるため一時保留。
+
+Vapor Mode 対応は[別途 Issue](./docs//issues/21.%20技術的TODO/[US-1]%20Vapor%20Mode%20対応/story.md) で管理する。
 
 ### UIコンポーネント：Park UI + Panda CSS
 

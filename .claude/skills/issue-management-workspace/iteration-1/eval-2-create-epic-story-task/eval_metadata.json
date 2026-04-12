@@ -1,0 +1,12 @@
+{
+  "eval_id": 2,
+  "eval_name": "eval-2-create-epic-story-task",
+  "prompt": "docs/issues/21. 技術的TODO/ ディレクトリ（存在しない場合は作成してください）に、「TypeScriptの型エラーを解消したい」というUser Story（[US-1]）を追加してください。story.mdには受け入れ基準として「型エラーが0件になること」をGiven/When/Then形式で書いてください。また、「tsgo --noEmitで型チェックを通す」というTaskファイルも作成してください。ファイルは実際に書き込んでください。",
+  "assertions": [
+    "docs/issues/21. 技術的TODO/ ディレクトリが存在する（または作成された）",
+    "epic.md が作成または既存のものが参照されている",
+    "[US-1] ディレクトリが作成されている",
+    "story.md に受け入れ基準がGiven/When/Then形式で記述されている",
+    "[TASK]*.md ファイルが作成されている"
+  ]
+}

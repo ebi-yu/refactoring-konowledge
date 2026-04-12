@@ -1,6 +1,9 @@
-export default defineNuxtConfig({
-  modules: ["@pinia/nuxt", "./codesandbox"],
+import { fileURLToPath, URL } from "node:url";
 
+export default defineNuxtConfig({
+  modules: ["@pinia/nuxt"],
+
+  compatibilityDate: "2026-04-12",
   future: { compatibilityVersion: 4 },
 
   experimental: {
@@ -8,7 +11,6 @@ export default defineNuxtConfig({
   },
 
   // 自動インポートを無効化（明示的 import を採用）
-  imports: { autoImport: false },
   components: { dirs: [] },
 
   nitro: {
@@ -19,7 +21,16 @@ export default defineNuxtConfig({
     propsDestructure: true,
   },
 
+  css: [fileURLToPath(new URL("./styled-system/styles.css", import.meta.url))],
+
+  alias: {
+    "styled-system": fileURLToPath(new URL("./styled-system", import.meta.url)),
+  },
+
   vite: {
+    optimizeDeps: {
+      include: ["@vue/devtools-core", "@vue/devtools-kit"],
+    },
     define: {
       __VUE_OPTIONS_API__: false,
     },
