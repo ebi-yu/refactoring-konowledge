@@ -4,6 +4,8 @@
 
 - `docs/architecture.md` — レイヤー設計・ディレクトリ構造
 - `docs/tech_stack.md` — 技術スタック
+- `docs/design-system.md` — デザインシステム方針（トークン・コンポーネント・モック）
+- `docs/implementation-flow.md` — 実装フロー（エピック→ストーリー→タスクの進め方）
 - `docs/issues/` — Epic / Story / Task
 
 ---
@@ -21,52 +23,21 @@ Vapor Mode 対応は[別途 Issue](./docs//issues/21.%20技術的TODO/[US-1]%20V
 
 ### UIコンポーネント：Park UI + Panda CSS
 
-| 用途                                                 | ツール                                            |
-| ---------------------------------------------------- | ------------------------------------------------- |
-| 既成UIコンポーネント（ボタン・モーダル・フォーム等） | Park UI (`@ark-ui/vue` + `@park-ui/panda-preset`) |
-| カスタムUIのスタイリング・design tokens              | Panda CSS                                         |
+- **既成UIコンポーネント（ボタン・モーダル・フォーム等）** → Park UI (`@ark-ui/vue` + `@park-ui/panda-preset`)
+- **カスタムUIのスタイリング・design tokens** → Panda CSS
 
 **Park UI の使い方：** `npx @park-ui/cli components add <component>` でコンポーネントを `app/components/ui/` にコピーして使う。コピーしたファイルは自由に編集してよい。
 
 **使い分け：** Park UI で補えないカスタムUIは Panda CSS で書く。Park UI コンポーネントのスタイル変更はコピー済みファイルを直接編集する。
 
-CSSはPanda CSSを使用すること。Panda CSSにおいてsva（Slot Variants API）を使用して、コンポーネントのスタイルをスロットごとに定義し、スタイルをコンポーネントに閉じ込めることが推奨される。
+CSSはPanda CSSを使用すること。スタイルは `sva`（Slot Variants API）でスロットごとに定義し、コンポーネントに閉じ込める。
 
 ```ts
-// Slot Recipe でスロットごとのスタイルを定義
-const modalStyles = sva({
-  slots: ["header", "body", "footer"],
-  base: {
-    header: { fontSize: "xl", fontWeight: "semibold", color: "text.primary" },
-    body: { fontSize: "sm", color: "text.muted" },
-    footer: { display: "flex", justifyContent: "flex-end", gap: "sm" },
-  },
-})
-
-// スタイルをコンポーネントに閉じ込める
-const classes = modalStyles()
-
-export const ModalHeader = ({ children }) => (
-  <h1 className={classes.header}>{children}</h1>
-)
-export const ModalBody = ({ children }) => (
-  <div className={classes.body}>{children}</div>
-)
-export const ModalFooter = ({ children }) => (
-  <div className={classes.footer}>{children}</div>
-)
-```
-
-```vue
-<script setup lang="ts" vapor>
-import { css } from "../styled-system/css";
-const modalClasses = modalStyles();
-// Vapor Mode でのスクリプト
-</script>
-
-<template>
-  <ModalHeader>>Hello 🐼!</ModalHeader>
-</template>
+const styles = sva({
+  slots: ["root", "title"],
+  base: { root: { p: "4" }, title: { fontSize: "xl" } },
+});
+const classes = styles();
 ```
 
 ## バックエンド
