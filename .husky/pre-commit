@@ -1,3 +1,1 @@
-export PATH="$HOME/.local/share/mise/shims:$PATH"
 bun lint-staged
-panda codegen
