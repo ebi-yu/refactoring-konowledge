@@ -12,22 +12,22 @@
 
 ### 基本設定
 
-- [ ] `.oxlintrc.json` を作成する
-- [ ] `plugins: ["vue"]` を追加して Vue ルールを有効化する
+- [x] `.oxlintrc.json` を作成する
+- [x] `plugins: ["vue"]` を追加して Vue ルールを有効化する
 
 ### Vue ルール
 
-- [ ] `vue/no-options-api`: Options API 使用を禁止（`__VUE_OPTIONS_API__: false` と一致させる）
-- [ ] `vue/component-api-style`: `["script-setup"]` のみ許可
+- [x] `vue/no-options-api`: Options API 使用を禁止（`__VUE_OPTIONS_API__: false` と一致させる）
+- [x] `vue/component-api-style`: `["script-setup"]` のみ許可
 
 ### TypeScript ルール
 
-- [ ] `no-unused-vars`: 未使用変数をエラーにする
-- [ ] `@typescript-eslint/no-explicit-any`: `any` 使用を警告にする
+- [x] `no-unused-vars`: 未使用変数をエラーにする
+- [x] `@typescript-eslint/no-explicit-any`: `any` 使用を警告にする
 
 ### 除外設定
 
-- [ ] `app/components/ui/**`: Ark UI ラッパーは一部ルールを緩和（vapor 対応後に見直し）
+- [x] `app/components/ui/**`: Ark UI ラッパーは一部ルールを緩和（vapor 対応後に見直し）
 
 ## 技術メモ
 
@@ -37,9 +37,9 @@
 
 ## 完了の定義（DoD）
 
-- [ ] コードが実装されている
-- [ ] `bun run lint` でエラーなし
-- [ ] セルフレビュー済み
+- [x] コードが実装されている
+- [x] `bun run lint` でエラーなし
+- [x] セルフレビュー済み
 
 ## 見積もり
 

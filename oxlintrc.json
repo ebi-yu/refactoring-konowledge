@@ -1,7 +1,21 @@
 {
   "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "plugins": ["vue"],
   "rules": {
     "no-unused-vars": "error",
-    "no-console": "warn"
-  }
+    "no-console": "warn",
+    "eqeqeq": "error",
+    "vue/no-options-api": "error",
+    "vue/component-api-style": ["error", ["script-setup"]],
+    "@typescript-eslint/no-explicit-any": "warn"
+  },
+  "overrides": [
+    {
+      "files": ["app/components/ui/**"],
+      "rules": {
+        "vue/no-options-api": "off",
+        "vue/component-api-style": "off"
+      }
+    }
+  ]
 }
