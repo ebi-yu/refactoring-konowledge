@@ -1,6 +1,4 @@
-## 参照
-
-開発環境・技術スタック・Vapor Mode など開発全般の情報は **[DEVELOPER.md](./.claude/references/DEVELOPER.md)** を参照。
+## 最重要戦略
 
 - ファイルの変更を始める前に必ずブランチを切ること（ブランチ戦略は `.agents/references/branch-strategy.md` を参照）
 - ファイルの変更を始める前に`git pull`して最新の状態にすること
@@ -22,6 +20,8 @@
 - MRを作成した際は`Copilot`をレビュワーに指定すること
 - `issues`を変更した際は、必ず関連するIssueを更新すること（`bash .agents/hooks/update-issues.sh` を使用）
 
-## 開発の進め方
+## 参照
 
-`implements` スキルに従う
+- `.agents/references/architecture.md` — レイヤー設計・ディレクトリ構造
+- `.agents/references/tech_stack.md` — 技術スタック
+- `issues/` : github issueと連携したローカルのIssueファイル群
