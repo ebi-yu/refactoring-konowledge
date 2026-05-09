@@ -183,7 +183,7 @@ definePageMeta({ ssr: false });
 
 ## 実装フロー
 
-詳細は `.agents/skills/implements/SKILL.md` を参照。
+詳細は `.agents/skills/implements-orchestrator/SKILL.md` と `.agents/skills/task-implementation/SKILL.md` を参照。
 
 実装は **エピック単位で計画し、タスク単位で実行する**。  
 エピック開始時（Phase 0）に `.pen` でエピック全体のUIをモックし、デザイントークンを確認・調整してから実装に入る。
