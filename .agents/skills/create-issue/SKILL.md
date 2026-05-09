@@ -1,6 +1,10 @@
 ---
 name: create-issue
+<<<<<<< HEAD
 description: 新しい Epic / Story / Task の issue ファイルを作成して GitHub に同期するスキル。Issue を作って、Epic を追加して、Story を作って、Task を作って、と言われたときに使うこと。
+=======
+description: 新しいEpic / Story / Taskのissueファイルを作成してGitHubに同期する。「Issueを作って」「Epicを追加して」「ストーリーを作成して」「タスクを追加して」と言われたとき、または新しい機能・タスクのIssueファイルが必要なときに必ずこのスキルを使うこと。
+>>>>>>> b7ee0ea2d181f9d93837b642c42a26e677d5eecd
 ---
 
 # create-issue スキル
