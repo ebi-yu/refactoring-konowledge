@@ -1,6 +1,6 @@
 #!/bin/bash
 # update-issues.sh
-# docs/issues/ の Epic > Story > Task 階層を GitHub Issues として一括作成する
+# issues/ の Epic > Story > Task 階層を GitHub Issues として一括作成する
 #
 # 親子関係: GitHub Sub-issues API を使用（ネイティブの親子関係）
 #   Epic → Story → Task
@@ -11,12 +11,12 @@
 #                ストーリー#<名前> → story・task に付与
 #
 # 使い方:
-#   bash .claude/hooks/update-issues.sh                                        # 全 Epic を対象に作成
-#   EPIC="認証・アカウント管理" bash .claude/hooks/update-issues.sh            # 指定 Epic のみ作成
-#   bash .claude/hooks/update-issues.sh docs/issues/<epic>/epic.md             # 指定ファイルのみ作成/更新
-#   bash .claude/hooks/update-issues.sh docs/issues/<epic>/<story>/story.md    # 指定ファイルのみ作成/更新
-#   bash .claude/hooks/update-issues.sh docs/issues/<epic>/<story>/(TASK)*.md  # 指定ファイルのみ作成/更新
-#   DRY_RUN=true bash .claude/hooks/update-issues.sh                           # ドライラン（GitHub に何も作成しない）
+#   bash .agents/hooks/update-issues.sh                                        # 全 Epic を対象に作成
+#   EPIC="認証・アカウント管理" bash .agents/hooks/update-issues.sh            # 指定 Epic のみ作成
+#   bash .agents/hooks/update-issues.sh issues/<epic>/epic.md             # 指定ファイルのみ作成/更新
+#   bash .agents/hooks/update-issues.sh issues/<epic>/<story>/story.md    # 指定ファイルのみ作成/更新
+#   bash .agents/hooks/update-issues.sh issues/<epic>/<story>/(TASK)*.md  # 指定ファイルのみ作成/更新
+#   DRY_RUN=true bash .agents/hooks/update-issues.sh                           # ドライラン（GitHub に何も作成しない）
 #
 # ※ マッピングファイルに記録済みの issue はスキップ（冪等）
 # ※ ファイル指定モードでは親 issue がマッピングにあれば自動でサブ issue リンクを張る
@@ -24,7 +24,7 @@
 set -uo pipefail
 
 REPO="ebi-yu/refactoring-konowledge"
-ISSUES_DIR="docs/issues"
+ISSUES_DIR="issues"
 MAPPING_FILE="${ISSUES_DIR}/.github-issue-map.json"
 DRY_RUN="${DRY_RUN:-false}"
 EPIC="${EPIC:-}"        # 指定があればそのエピックのみ処理

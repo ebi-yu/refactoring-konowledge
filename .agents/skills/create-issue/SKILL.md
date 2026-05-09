@@ -1,23 +1,31 @@
 ---
 name: create-issue
+<<<<<<< HEAD
+description: 新しい Epic / Story / Task の issue ファイルを作成して GitHub に同期するスキル。Issue を作って、Epic を追加して、Story を作って、Task を作って、と言われたときに使うこと。
+=======
 description: 新しいEpic / Story / Taskのissueファイルを作成してGitHubに同期する。「Issueを作って」「Epicを追加して」「ストーリーを作成して」「タスクを追加して」と言われたとき、または新しい機能・タスクのIssueファイルが必要なときに必ずこのスキルを使うこと。
+>>>>>>> b7ee0ea2d181f9d93837b642c42a26e677d5eecd
 ---
 
-## 現在のIssueディレクトリ構造
+# create-issue スキル
 
-!`ls docs/issues/`
+新しい Issue ファイルを作成し、GitHub に同期する。
+
+## 現在の Issue ディレクトリ構造
+
+!`ls issues/`
 
 ## あなたのタスク
 
-新しいIssueファイルを作成し、GitHubに同期する。
+新しい Issue ファイルを作成し、GitHub に同期する。
 
 ### ステップ 1: 作成するレベルを判断する
 
 ユーザーのリクエストから何を作成するか判断する:
 
-- **Epic** → `docs/issues/<N>. <エピック名>/epic.md`
-- **Story** → `docs/issues/<epic>/<[US-N] ストーリー名>/story.md`
-- **Task** → `docs/issues/<epic>/<story>/[TASK] <タスク名>.md`
+- **Epic** → `issues/<N>. <エピック名>/epic.md`
+- **Story** → `issues/<epic>/<[US-N] ストーリー名>/story.md`
+- **Task** → `issues/<epic>/<story>/[TASK] <タスク名>.md`
 
 ディレクトリ番号は既存の最大番号 + 1 とする。
 
@@ -55,7 +63,7 @@ description: 新しいEpic / Story / Taskのissueファイルを作成してGitH
 
 ## 参照
 
-- [feature_scope](./docs/feature_scope.md)
+- [feature_scope](.agents/references/feature_scope.md)
 ```
 
 #### Story テンプレート
@@ -128,15 +136,15 @@ description: 新しいEpic / Story / Taskのissueファイルを作成してGitH
 
 ```bash
 # Epic
-bash .claude/hooks/update-issues.sh "docs/issues/<epic>/epic.md"
+bash .agents/hooks/update-issues.sh "issues/<epic>/epic.md"
 
 # Story（Epicが同期済みであること）
-bash .claude/hooks/update-issues.sh "docs/issues/<epic>/<story>/story.md"
+bash .agents/hooks/update-issues.sh "issues/<epic>/<story>/story.md"
 
 # Task（Storyが同期済みであること）
-bash .claude/hooks/update-issues.sh "docs/issues/<epic>/<story>/[TASK] タスク名.md"
+bash .agents/hooks/update-issues.sh "issues/<epic>/<story>/[TASK] タスク名.md"
 ```
 
 ### ステップ 4: 結果を報告する
 
-作成したファイルパスとGitHub Issue番号（#N）をユーザーに報告する。
+作成したファイルパスと GitHub Issue 番号（#N）をユーザーに報告する。
