@@ -12,7 +12,7 @@
     "format": "oxfmt app server shared *.ts *.json",
     "format:check": "oxfmt app server shared *.ts *.json --check",
     "prepare": "husky",
-    "update:issue": "bash .claude/hooks/update-issues.sh"
+    "update:issue": "bash .agents/hooks/update-issues.sh"
   },
   "dependencies": {
     "@ark-ui/vue": "^5.36.0",

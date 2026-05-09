@@ -1,0 +1,6 @@
+[mcp_servers.panda]
+args = [
+    "panda",
+    "mcp",
+]
+command = "npx"
