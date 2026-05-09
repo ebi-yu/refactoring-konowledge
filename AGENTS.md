@@ -4,6 +4,7 @@
 - ファイルの変更を始める前に`git pull`して最新の状態にすること
 - ファイルの変更を始める前に`git pull origin main`して作業ブランチにmainブランチをマージすること
 - コミットは小さく意味のある単位で行ってよい（確認はMR/PRで行う）
+- コミットを行ったら、必ずgithubにPRを作成してユーザーにマージを依頼すること（PRのレビュワーには必ずCopilotを指定すること）
 - 開発作業の入口は `implements-orchestrator` スキルを使うこと
 - Task単位の具体実装は `task-implementation` スキルを使うこと
 - バグを見つけた場合は `bug-triage` スキルでIssue化・分類してから進めること
