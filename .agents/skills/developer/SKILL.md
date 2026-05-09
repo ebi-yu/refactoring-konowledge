@@ -75,7 +75,7 @@ Epic・US・Taskのファイルはすでに存在している前提で進む。
 
 #### 2. .pen でモックを作る
 
-`frontend-workflow` スキルの Pencil MCP を使い、ワイヤーフレームレベルのモックを作成する。
+Pencil MCP を使い、ワイヤーフレームレベルのモックを `docs/issues/<epic>/design.pen` に作成する。
 
 確認・決定する項目：
 
