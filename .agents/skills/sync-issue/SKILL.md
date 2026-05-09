@@ -1,6 +1,6 @@
 ---
-description: 指定したIssueファイル（epic.md / story.md / [TASK]*.md）をGitHub Issueに同期する
-allowed-tools: Bash(.claude/hooks/update-issues.sh:*)
+name: sync-issue
+description: 指定したIssueファイル（epic.md / story.md / [TASK]*.md）をGitHub Issueに同期する。「Issueを同期して」「GitHubに反映して」「issueを更新して」と言われたとき、またはIssueファイルを編集した後にGitHubへの同期が必要なときに必ずこのスキルを使うこと。
 ---
 
 ## 現在のIssue状況

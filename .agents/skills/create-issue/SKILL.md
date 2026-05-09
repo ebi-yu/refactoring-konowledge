@@ -1,6 +1,6 @@
 ---
-description: 新しいEpic / Story / Taskのissueファイルを作成してGitHubに同期する
-allowed-tools: Bash(.claude/hooks/update-issues.sh:*), Write, Read, Bash(ls:*)
+name: create-issue
+description: 新しいEpic / Story / Taskのissueファイルを作成してGitHubに同期する。「Issueを作って」「Epicを追加して」「ストーリーを作成して」「タスクを追加して」と言われたとき、または新しい機能・タスクのIssueファイルが必要なときに必ずこのスキルを使うこと。
 ---
 
 ## 現在のIssueディレクトリ構造

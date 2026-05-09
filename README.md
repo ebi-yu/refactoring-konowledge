@@ -1,4 +1,4 @@
-# refactoring-konowledge
+# refactoring-knowledge
 
 ## セットアップ
 
