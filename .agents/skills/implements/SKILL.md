@@ -16,8 +16,8 @@ GitHub Issues とローカルの `issues/` を連携し、Epic → Story → Tas
 
 - GitHub Issue とローカルの `issues/` の内容を連携させている
 - 連携には `.agents/hooks/update-issues.sh` を使用する
-- フロントエンドの実装フローは `frontend-workflow` スキルを参照すること
-- バックエンドの実装フローは `backend-workflow` スキルを参照すること
+- フロントエンドの実装フローは `references/frontend-workflow` を参照すること
+- バックエンドの実装フローは `references/backend-workflow` を参照すること
 
 ---
 
