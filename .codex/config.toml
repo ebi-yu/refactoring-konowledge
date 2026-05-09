@@ -1,3 +1,12 @@
+[mcp_servers.browser-use]
+args = [
+    "--from",
+    "browser-use[cli]",
+    "browser-use",
+    "--mcp",
+]
+command = "uvx"
+
 [mcp_servers.panda]
 args = [
     "panda",
